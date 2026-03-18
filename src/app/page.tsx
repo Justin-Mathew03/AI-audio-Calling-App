@@ -29,17 +29,17 @@ export default function Home() {
           window.alert("Sucessfully created");
         },
       },
-    ); 
+    );
   };
   if (session) {
-      return (
-        <div className="flex flex-col p-4 gap-y-4">
-          <p>Logged in as {session.user.name}</p>
-          <Button onClick={() => authClient.signOut()}>Sign Out</Button>
-        </div>
-      );
-    }
-  const onLogin= () => {
+    return (
+      <div className="flex flex-col p-4 gap-y-4">
+        <p>Logged in as {session.user.name}</p>
+        <Button onClick={() => authClient.signOut()}>Sign Out</Button>
+      </div>
+    );
+  }
+  const onLogin = () => {
     if (!email || !password) {
       alert("All fields are required");
       return;
@@ -58,48 +58,47 @@ export default function Home() {
           window.alert("Sucessful");
         },
       },
-    ); 
+    );
   };
   return (
-    <div className ="flex flex-col gap-y-10">
-    <div className="p-4 flex flex-col gap-y-4">
-      <Input
-        placeholder="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="password"
-        placeholder="password"
-        autoComplete="new-password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button onClick={onSubmit}>Create User</Button>
-    </div>
-    <div className="p-4 flex flex-col gap-y-4">
-
-      <Input
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="password"
-        placeholder="password"
-        autoComplete="new-password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button onClick={onLogin}>Login</Button>
-    </div>
+    <div className="flex flex-col gap-y-10">
+      <div className="p-4 flex flex-col gap-y-4">
+        <Input
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Input
+          type="email"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="password"
+          autoComplete="new-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={onSubmit}>Create User</Button>
+      </div>
+      <div className="p-4 flex flex-col gap-y-4">
+        <Input
+          type="email"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          type="password"
+          placeholder="password"
+          autoComplete="new-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={onLogin}>Login</Button>
+      </div>
     </div>
   );
 }
