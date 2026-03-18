@@ -1,10 +1,6 @@
-import { Card } from "@/components/ui/card";
+import {SignInView } from "@/modules/auth/ui/views/signin-view";
 const Page = () => {
-  return (
-    
-        <Card>sign-in page</Card>
-     
-  );
+  return<SignInView/>
 };
 
 export default Page;
