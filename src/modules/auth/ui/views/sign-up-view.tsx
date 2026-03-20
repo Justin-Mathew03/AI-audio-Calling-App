@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { FaGithub,FaGoogle} from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { OctagonAlertIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -58,7 +58,6 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        
       },
       {
         onSuccess: () => {
@@ -205,7 +204,7 @@ export const SignUpView = () => {
                     type="button"
                     className="w-full"
                   >
-                   <FaGoogle/>
+                    <FaGoogle />
                   </Button>
                   <Button
                     disabled={pending}
@@ -229,7 +228,7 @@ export const SignUpView = () => {
               </div>
             </form>
           </Form>
-          <div className="hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-green-600 to-green-900 text-white rounded-r-xl">
+          <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img src="/logo.svg" alt="Image" className="h-23 w-23" />
             <p className="text-2xl font-semibold text-white">NOVA Call</p>
           </div>
