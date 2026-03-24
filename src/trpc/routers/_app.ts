@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { agentsRouter } from '@/modules/agents/server/procedures'; 
-import { baseProcedure, createTRPCRouter } from '../init';
-import { agents } from '@/db/schema';
+import { agentsRouter } from "@/modules/agents/server/procedures";
+import { baseProcedure, createTRPCRouter } from "../init";
+import { agents } from "@/db/schema";
 
 export const appRouter = createTRPCRouter({
-    agents:agentsRouter,
+  agents: agentsRouter,
 });
 
 // export type definition of API
