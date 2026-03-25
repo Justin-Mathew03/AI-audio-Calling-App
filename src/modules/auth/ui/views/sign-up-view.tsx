@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 import { OctagonAlertIcon } from "lucide-react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
@@ -24,18 +25,19 @@ import {
 
 const formSchema = z
   .object({
-    name: z.string().min(1, { message: "Name Is Required" }),
+    name: z.string().min(1, { message: "Name is required" }),
     email: z.string().email(),
-    password: z.string().min(1, { message: "Passward is required" }),
-    confirmPassword: z.string().min(1, { message: "Passward is required" }),
+    password: z.string().min(1, { message: "Password is required" }),
+    confirmPassword: z.string().min(1, { message: "Password is required" }),
   })
-  .refine((data) => data.password == data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
 
 export const SignUpView = () => {
   const router = useRouter();
+
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -58,6 +60,7 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
@@ -71,6 +74,7 @@ export const SignUpView = () => {
       },
     );
   };
+
   const onSocial = (provider: "github" | "google") => {
     setError(null);
     setPending(true);
@@ -94,11 +98,11 @@ export const SignUpView = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Card className="w-full max-w-4xl overflow-hidden rounded-xl shadow-sm">
+      <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Let&apos;s get started</h1>
                   <p className="text-muted-foreground text-balance">
@@ -114,7 +118,7 @@ export const SignUpView = () => {
                         <FormLabel>Name</FormLabel>
                         <FormControl>
                           <Input
-                            type="Name"
+                            type="text"
                             placeholder="John Doe"
                             {...field}
                           />
@@ -134,7 +138,7 @@ export const SignUpView = () => {
                         <FormControl>
                           <Input
                             type="email"
-                            placeholder="m@emaple.com"
+                            placeholder="m@example.com"
                             {...field}
                           />
                         </FormControl>
@@ -153,7 +157,7 @@ export const SignUpView = () => {
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="**********"
+                            placeholder="********"
                             {...field}
                           />
                         </FormControl>
@@ -172,7 +176,7 @@ export const SignUpView = () => {
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="**********"
+                            placeholder="********"
                             {...field}
                           />
                         </FormControl>
@@ -188,13 +192,12 @@ export const SignUpView = () => {
                   </Alert>
                 )}
                 <Button disabled={pending} type="submit" className="w-full">
-                  Sign Up
+                  Sign in
                 </Button>
-                <div className="relative text-center text-sm">
-                  <span className="bg-white px-2 text-muted-foreground relative z-10">
+                <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+                  <span className="bg-card text-muted-foreground relative z-10 px-2">
                     Or continue with
                   </span>
-                  <div className="absolute inset-0 top-1/2 border-t" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <Button
@@ -207,8 +210,8 @@ export const SignUpView = () => {
                     <FaGoogle />
                   </Button>
                   <Button
-                    disabled={pending}
                     onClick={() => onSocial("github")}
+                    disabled={pending}
                     variant="outline"
                     type="button"
                     className="w-full"
@@ -222,22 +225,23 @@ export const SignUpView = () => {
                     href="/sign-in"
                     className="underline underline-offset-4"
                   >
-                    Sign-In
+                    Sign in
                   </Link>
                 </div>
               </div>
             </form>
           </Form>
+
           <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-            <img src="/logo.svg" alt="Image" className="h-23 w-23" />
-            <p className="text-2xl font-semibold text-white">NOVA Call</p>
+            <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]" />
+            <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
         </CardContent>
       </Card>
-      <div className="text-muted-foreground text-center text-xs mt-4">
-        By clicking continue, you agree to our{" "}
-        <a className="underline">Terms of Service</a> and{" "}
-        <a className="underline">Privacy Policy</a>
+
+      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
+        and <a href="#">Privacy Policy</a>
       </div>
     </div>
   );
