@@ -15,6 +15,12 @@ interface DataTableProps<TData, TValue> {
   onRowClick?: (row: TData) => void;
 }
 
+/**
+ * Renders a generic, client-side data table using the supplied column definitions and row data.
+ *
+ * @param onRowClick - Optional callback invoked with the original row object when a row is clicked.
+ * @returns A JSX element containing the rendered table; displays a single "No results." row when `data` is empty.
+ */
 export function DataTable<TData, TValue>({
   columns,
   data,
