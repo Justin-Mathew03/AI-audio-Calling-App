@@ -23,7 +23,7 @@ interface Props {
   placeholder?: string;
   isSearchable?: boolean;
   className?: string;
-}
+};
 
 export const CommandSelect = ({
   options,
@@ -35,6 +35,11 @@ export const CommandSelect = ({
 }: Props) => {
   const [open, setOpen] = useState(false);
   const selectedOption = options.find((option) => option.value === value);
+
+  const handleOpenChange = (open: boolean) => {
+    onSearch?.("");
+    setOpen(open);
+  };
 
   return (
     <>
@@ -48,13 +53,15 @@ export const CommandSelect = ({
           className,
         )}
       >
-        <div>{selectedOption?.children ?? placeholder}</div>
+        <div>
+          {selectedOption?.children ?? placeholder}
+        </div>
         <ChevronsUpDownIcon />
       </Button>
       <CommandResponsiveDialog
         shouldFilter={!onSearch}
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={handleOpenChange}
       >
         <CommandInput placeholder="Search..." onValueChange={onSearch} />
         <CommandList>
@@ -67,7 +74,7 @@ export const CommandSelect = ({
             <CommandItem
               key={option.id}
               onSelect={() => {
-                onSelect(option.value);
+                onSelect(option.value)
                 setOpen(false);
               }}
             >
