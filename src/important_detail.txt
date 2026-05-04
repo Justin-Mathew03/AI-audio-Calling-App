@@ -1,0 +1,1 @@
+static domain: ngrok http --url=gemological-drucilla-coordinately.ngrok-free.dev 3000
